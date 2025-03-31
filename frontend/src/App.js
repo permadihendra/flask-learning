@@ -1,5 +1,7 @@
 import {useState} from 'react'
 import Dashboard from './Dashboard'
+import User from './User'
+import UserAxiosFecth from './UserAxiosFetch'
 
 const App = () => {
   const [count, setCount] = useState(0)
@@ -48,6 +50,18 @@ const App = () => {
         <h2>Dashboard</h2>
         <Dashboard />
       </div>
+
+      <div>
+        <h2>useEffect() - Users</h2>
+        <p>usereffect for side effect operation in function component by fetching data from an external source.</p>
+        <User />
+      </div>
+
+      <div>
+        <h2>Axios Fetch - Users</h2>
+        <UserAxiosFecth />
+      </div>
+
 
     {/* End of Layout */}
     </div> 
