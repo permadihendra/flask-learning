@@ -1,10 +1,12 @@
 import React from "react";
 
 const EventsPage = () => {
-    return
+    return(
     <div>
         Event page
     </div>
+    );
+    
 }
 
 export default EventsPage;

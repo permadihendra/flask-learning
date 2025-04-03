@@ -1,10 +1,12 @@
 import React from "react";
 
 const SpeakerPage = () => {
-    return
+    return (
     <div>
         Speaker page
     </div>
+    );
+    
 }
 
 export default SpeakerPage;

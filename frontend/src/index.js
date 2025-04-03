@@ -1,17 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+// import App from './App';
+
+// Newly Added
+import { createBrowserRouter, RouterProvider } from 'react-router'
+import HomePage from './pages/HomePage/HomePage';
+import AboutPage from './pages/AboutPage/AboutPage';
+import SpeakerPage from './pages/SpeakerPage/SpeakerPage';
+import EventsPage from './pages/EventsPage/EventPage';
+import SponsorsPage from './pages/SponsorsPage/SponsorsPage';
+import ContactPage from './pages/ContactPage/ContactPage';
+
+// Router/Routing
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />
+  },
+  {
+    path: "/about",
+    element: <AboutPage />,
+  },
+  {
+    path: "/speakers",
+    element: <SpeakerPage />,
+  },
+  {
+    path: "/events",
+    element: <EventsPage />,
+  },
+  {
+    path: "/sponsors",
+    element: <SponsorsPage />,
+  },
+  {
+    path: "/contact",
+    element: <ContactPage />,
+  }
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <RouterProvider router={router} />
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

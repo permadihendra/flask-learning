@@ -1,10 +1,12 @@
 import React from "react";
 
 const ContactPage = () => {
-    return
+    return (
     <div>
         Contact page
     </div>
+    );
+    
 }
 
 export default ContactPage;
