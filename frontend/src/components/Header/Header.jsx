@@ -1,7 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 const Header = () => {
+
+  const navigate = useNavigate();
+  const handleLoginButtonClick = () => {
+    navigate('/auth/login');
+  };
+
   return (
     <header className="header">
 
@@ -17,7 +23,7 @@ const Header = () => {
           </ul>
         </nav>
         <div className="auth">
-          <button className="btn">Login</button>
+          <button onClick={handleLoginButtonClick} className="btn">Login</button>
         </div>
     </header>
   );

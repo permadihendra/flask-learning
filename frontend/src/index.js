@@ -12,6 +12,8 @@ import SpeakerDetail from './pages/SpeakerDetail/SpeakerDetail';
 import EventsPage from './pages/EventsPage/EventsPage';
 import SponsorsPage from './pages/SponsorsPage/SponsorsPage';
 import ContactPage from './pages/ContactPage/ContactPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+import SignUp from './pages/Auth/SignUp';
 
 // Router/Routing
 const router = createBrowserRouter([
@@ -47,6 +49,15 @@ const router = createBrowserRouter([
   {
     path: "/contact",
     element: <ContactPage />,
+  },
+
+  {
+    path: "/auth/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/auth/signup",
+    element: <SignUp />
   }
 ]);
 
