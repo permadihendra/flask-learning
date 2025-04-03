@@ -1,12 +1,18 @@
 import React from "react";
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import Hero from '../../components/Hero/Hero';
 
 const ContactPage = () => {
     return (
     <div>
-        Contact page
+    <Header />
+    <Hero />
+    <Footer />
+
+
     </div>
     );
-    
 }
 
 export default ContactPage;

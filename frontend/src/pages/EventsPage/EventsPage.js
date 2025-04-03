@@ -3,7 +3,7 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Hero from '../../components/Hero/Hero';
 
-const SponsorsPage = () => {
+const EventsPage = () => {
     return (
     <div>
     <Header />
@@ -15,4 +15,4 @@ const SponsorsPage = () => {
     );
 }
 
-export default SponsorsPage;
+export default EventsPage;

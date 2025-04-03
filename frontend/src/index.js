@@ -8,7 +8,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router'
 import HomePage from './pages/HomePage/HomePage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import SpeakerPage from './pages/SpeakerPage/SpeakerPage';
-import EventsPage from './pages/EventsPage/EventPage';
+import SpeakerDetail from './pages/SpeakerDetail/SpeakerDetail';
+import EventsPage from './pages/EventsPage/EventsPage';
 import SponsorsPage from './pages/SponsorsPage/SponsorsPage';
 import ContactPage from './pages/ContactPage/ContactPage';
 
@@ -24,7 +25,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/speakers",
-    element: <SpeakerPage />,
+    children: [
+      {
+        index: true,
+        element: <SpeakerPage />,
+      },
+      {
+        path: "/speakers/:speakerId",
+        element: <SpeakerDetail />
+      },
+    ],
   },
   {
     path: "/events",
