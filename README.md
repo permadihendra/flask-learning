@@ -1,4 +1,4 @@
-# 🚀 flask-learning
+# 🚀 flask-learning + React
 My Learning repositories for Flask and React
 
 ## 🛠️ Tech Stack
