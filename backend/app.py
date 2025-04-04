@@ -140,6 +140,8 @@ def remove_venue(id):
 ## --------------------------------
 ## EVENTS REGISTRATION API ENDPOINT
 ## --------------------------------
+
+## Event Registration -> Add New Attendees
 @app.route("/api/v1/events-registration", methods=['POST'])
 def add_attendees():
     if request.method == 'POST':
@@ -152,6 +154,8 @@ def add_attendees():
         company_name = data.get('company_name')
         company_size = data.get('company_size')
         subject = data.get('subject')
+
+        print(data)
 
         if first_name and last_name and email and phone and subject:
             existing_attendee = EventRegistration.query.filter_by(email=email).first()
@@ -178,6 +182,18 @@ def add_attendees():
                 }), 201
         else:
             return jsonify({'error': 'Invalid input'}), 400
+## Event Registration -> view all registration 
+@app.route('/api/v1/events-registration', methods=['GET'])   
+def retrieve_attendees():
+    if request.method == 'GET':
+        all_attendees = EventRegistration.query.all()
+        if all_attendees:
+            return jsonify({
+                'success': True,
+                'venues': [attendees.format() for attendees in all_attendees]
+            }), 200
+        else:
+            return jsonify(message="No venue record found!"), 404
 
 # @app.route('/api/v1/speakers/')
 # def speakers():
