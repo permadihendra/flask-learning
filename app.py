@@ -50,7 +50,7 @@ def add_venues():
             db.session.commit()
             return jsonify({
                 'success' : True,
-                'venues': venue.format()
+                'venues': new_venue.format()
             }), 201
         
 ## Venues API endpoint -> retrieve all the venues in database
