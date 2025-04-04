@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///bizza.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-# Create Venue class model
+# Venue class model
 class Venue(db.Model):
     __tablename__ = 'venues'
     id = db.Column(db.Integer, primary_key=True)
@@ -19,6 +19,32 @@ class Venue(db.Model):
         return {
             'id': self.id,
             'name': self.name
+        }
+
+
+# Event Registration Class Model
+class EventRegistration(db.Model):
+    __tablename__ = 'attendees'
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(100), nullable=False)
+    last_name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    phone = db.Column(db.String(100), unique=True, nullable=False)
+    job_title = db.Column(db.String(100), nullable=False)
+    company_name = db.Column(db.String(100), nullable=False)
+    company_size = db.Column(db.String(50), nullable=False)
+    subject = db.Column(db.String(250), nullable=False)
+    def format(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+            'phone': self.phone,
+            'job_title': self.job_title,
+            'company_name': self.company_name,
+            'company_size': self.company_size,
+            'subject': self.subject,
         }
 
 
@@ -110,6 +136,48 @@ def remove_venue(id):
             }), 202
         else:
             return jsonify(message="That venue does not exist"), 404
+        
+## --------------------------------
+## EVENTS REGISTRATION API ENDPOINT
+## --------------------------------
+@app.route("/api/v1/events-registration", methods=['POST'])
+def add_attendees():
+    if request.method == 'POST':
+        data = request.get_json()
+        first_name = data.get('first_name')
+        last_name = data.get('last_name')
+        email = data.get('email')
+        phone = data.get('phone')
+        job_title = data.get('job_title')
+        company_name = data.get('company_name')
+        company_size = data.get('company_size')
+        subject = data.get('subject')
+
+        if first_name and last_name and email and phone and subject:
+            existing_attendee = EventRegistration.query.filter_by(email=email).first()
+            
+            if existing_attendee:
+                return jsonify(message="Email address already exists!"), 409
+            else:
+                new_attendee = EventRegistration(
+                    first_name=first_name,
+                    last_name=last_name,
+                    email=email,
+                    phone=phone,
+                    job_title=job_title,
+                    company_name=company_name,
+                    company_size=company_size,
+                    subject=subject
+                )
+                db.session.add(new_attendee)
+                db.session.commit()
+
+                return jsonify({
+                    'success': True,
+                    'new_attendee': new_attendee.format()
+                }), 201
+        else:
+            return jsonify({'error': 'Invalid input'}), 400
 
 # @app.route('/api/v1/speakers/')
 # def speakers():
