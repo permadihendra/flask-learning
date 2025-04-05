@@ -28,32 +28,32 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <AdminPage />,
-    children: [
-      {
-        path: "/admin/dashboard",
-        element: <Dashboard />,
-      },
-      {
-        path: "/admin/speakers",
-        element: <Speakers />,
-      },
-      {
-        path: "/admin/venues",
-        element: <venues />,
-      },
-      {
-        path: "/admin/events",
-        element: <Events />,
-      },
-      {
-        path: "/admin/schedules",
-        element: <Schedules />,
-      },
-      {
-        path: "/admin/sponsors",
-        element: <Sponsors />
-      }
-    ]
+    // children: [
+    //   {
+    //     path: "/admin/dashboard",
+    //     element: <Dashboard />,
+    //   },
+    //   {
+    //     path: "/admin/speakers",
+    //     element: <Speakers />,
+    //   },
+    //   {
+    //     path: "/admin/venues",
+    //     element: <venues />,
+    //   },
+    //   {
+    //     path: "/admin/events",
+    //     element: <Events />,
+    //   },
+    //   {
+    //     path: "/admin/schedules",
+    //     element: <Schedules />,
+    //   },
+    //   {
+    //     path: "/admin/sponsors",
+    //     element: <Sponsors />
+    //   }
+    // ]
   },
 
   {
