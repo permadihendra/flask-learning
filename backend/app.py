@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
+from models import db, Venue, EventRegistration, Speaker
 
 app = Flask(__name__)
 
@@ -8,44 +9,9 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///bizza.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
-# Venue class model
-class Venue(db.Model):
-    __tablename__ = 'venues'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    def format(self):
-        return {
-            'id': self.id,
-            'name': self.name
-        }
-
-
-# Event Registration Class Model
-class EventRegistration(db.Model):
-    __tablename__ = 'attendees'
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(100), nullable=False)
-    last_name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    phone = db.Column(db.String(100), unique=True, nullable=False)
-    job_title = db.Column(db.String(100), nullable=False)
-    company_name = db.Column(db.String(100), nullable=False)
-    company_size = db.Column(db.String(50), nullable=False)
-    subject = db.Column(db.String(250), nullable=False)
-    def format(self):
-        return {
-            'id': self.id,
-            'first_name': self.first_name,
-            'last_name': self.last_name,
-            'email': self.email,
-            'phone': self.phone,
-            'job_title': self.job_title,
-            'company_name': self.company_name,
-            'company_size': self.company_size,
-            'subject': self.subject,
-        }
+# initialize models.db with app
+db.init_app(app)  
 
 
 # Applications API Routing
@@ -54,13 +20,9 @@ class EventRegistration(db.Model):
 def index():
     return 'Welcome to Bizza REST API Server'
 
-## venues API Endpoint
-# @app.route('/api/v1/venues')
-# def venues():
-#     return jsonify({
-#         "id": 1,
-#         "name": "Auditorium A"
-#     }), 200
+## --------------------------------
+## VENUES API ENDPOINT
+## --------------------------------
 
 ## Venues API Endpont -> add new venue
 @app.route('/api/v1/venues', methods=['POST'])
