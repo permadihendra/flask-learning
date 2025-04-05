@@ -1,26 +1,22 @@
 import * as React from 'react';
-import { Link as RouterLink, Outlet } from 'react-router';
-import { Link } from '@mui/material';
+import { Outlet } from 'react-router';
 import PropTypes from 'prop-types';
 
+// Import MUI Component Library
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Menu, MenuItem } from '@mui/material';
 import {AccountCircle} from '@mui/icons-material';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+
+// Import Sidebar Menu
+import SidebarMenu from './SidebarMenu';
+
 
 const drawerWidth = 240;
 
@@ -54,53 +50,10 @@ function AdminPage(props) {
 
   const drawer = (
     <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        <ListItem key="dashboard" disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <Link
-                to="/admin" 
-                component={RouterLink}
-                underline="none"
-                color="inherit"
-                >Dashboard
-                </Link>
-            </ListItemButton>
-        </ListItem>
+    {/* Load Sidebar Menu Component */}
+    
+    <SidebarMenu />
 
-        <ListItem key="speakers" disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <Link
-                to="/admin/speakers" 
-                component={RouterLink}
-                underline="none"
-                color="inherit"
-                >Speakers
-                </Link>
-            </ListItemButton>
-        </ListItem>
-
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
     </div>
   );
 
@@ -125,7 +78,7 @@ function AdminPage(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
-            Responsive drawer
+            Admin Page
           </Typography>
           <IconButton color="inherit" onClick={handleMenuOpen}>
             <AccountCircle />

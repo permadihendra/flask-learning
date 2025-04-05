@@ -4,7 +4,7 @@ import './index.css';
 // import App from './App';
 
 // Newly Added
-import { createBrowserRouter, RouterProvider } from 'react-router'
+import { createBrowserRouter, RouterProvider , Navigate} from 'react-router'
 import HomePage from './pages/HomePage/HomePage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import SpeakerPage from './pages/SpeakerPage/SpeakerPage';
@@ -18,6 +18,7 @@ import SignUp from './pages/Auth/SignUp';
 // Import AdminPage Component
 import AdminPage from './pages/Admin/AdminPage/AdminPage'
 import Speakers from './pages/Admin/AdminPage/Speakers'
+import Dashboard from './pages/Admin/AdminPage/Dashboard';
 
 // Router/Routing
 const router = createBrowserRouter([
@@ -30,10 +31,14 @@ const router = createBrowserRouter([
     path: "/admin",
     element: <AdminPage />,
     children: [
-      // {
-      //   path: "/admin/dashboard",
-      //   element: <Dashboard />,
-      // },
+      {
+        index: true, // ✅ Default route
+        element: <Navigate to="/admin/dashboard" replace />,
+      },
+      {
+        path: "/admin/dashboard",
+        element: <Dashboard />,
+      },
       {
         path: "/admin/speakers",
         element: <Speakers />,
