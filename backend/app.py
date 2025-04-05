@@ -195,29 +195,18 @@ def retrieve_attendees():
         else:
             return jsonify(message="No venue record found!"), 404
 
-# @app.route('/api/v1/speakers/')
-# def speakers():
-#     firstname = request.args.get("firstname")
-#     lastname = request.args.get("lastname")
-#     if firstname is not None and lastname is not None:
-#         return jsonify(message="The speaker's fullname : "+firstname+" "+lastname)
-#     else:
-#         return jsonify(message="No query parameters in the url")
+## --------------------------------
+## SPEAKERS API ENDPOINT
+## --------------------------------
 
-@app.route('/api/v1/speakers/<int:speakerId>')
-def getSpeaker(speakerId):
-     # Simulated data lookup
-    speakers = {
-        1: {"id": 1, "name": "John Doe", "topic": "AI"},
-        2: {"id": 2, "name": "Jane Smith", "topic": "Cybersecurity"}
-    }
-
-    speakerData = speakers.get(speakerId)
-
-    if speakerData:
-        return jsonify(speakerData)
+## Speakers -> get all speakers
+@app.route('/api/v1/speakers', methods=['GET']) 
+def get_speakers():
+    speakers = Speaker.query.all()
+    if not speakers:
+        return jsonify({"error": "No speakers data found"})
     else:
-        return jsonify({"error": "Speaker not found"}), 404
+        return jsonify([speaker.serialize() for speaker in speakers]), 200
 
 if __name__ == '__main__':
     app.run()
