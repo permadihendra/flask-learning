@@ -17,6 +17,7 @@ import SignUp from './pages/Auth/SignUp';
 
 // Import AdminPage Component
 import AdminPage from './pages/Admin/AdminPage/AdminPage'
+import Speakers from './pages/Admin/AdminPage/Speakers'
 
 // Router/Routing
 const router = createBrowserRouter([
@@ -28,15 +29,15 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <AdminPage />,
-    // children: [
-    //   {
-    //     path: "/admin/dashboard",
-    //     element: <Dashboard />,
-    //   },
-    //   {
-    //     path: "/admin/speakers",
-    //     element: <Speakers />,
-    //   },
+    children: [
+      // {
+      //   path: "/admin/dashboard",
+      //   element: <Dashboard />,
+      // },
+      {
+        path: "/admin/speakers",
+        element: <Speakers />,
+      },
     //   {
     //     path: "/admin/venues",
     //     element: <venues />,
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
     //     path: "/admin/sponsors",
     //     element: <Sponsors />
     //   }
-    // ]
+    ]
   },
 
   {
