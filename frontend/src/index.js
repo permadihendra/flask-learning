@@ -15,6 +15,9 @@ import ContactPage from './pages/ContactPage/ContactPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import SignUp from './pages/Auth/SignUp';
 
+// Import AdminPage Component
+import AdminPage from './pages/Admin/AdminPage/AdminPage'
+
 // Router/Routing
 const router = createBrowserRouter([
   {

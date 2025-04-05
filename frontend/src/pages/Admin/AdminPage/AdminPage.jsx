@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router";
 import { Sidebar } from "../../../components/admin/Sidebar/Sidebar";
+
 import './AdminPage.css';
 
 const AdminPage = () => {
@@ -11,3 +12,5 @@ const AdminPage = () => {
         </div>
     );
 }
+
+export default AdminPage;
