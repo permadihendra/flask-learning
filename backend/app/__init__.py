@@ -1,8 +1,9 @@
 from flask import Flask
 from .config import Config
 from app.models import db
-from app.models.venue import Venue
-from app.models.event_registration import EventRegistration
+
+# from app.models.venue import Venue
+# from app.models.event_registration import EventRegistration
 
 # Import Routes
 from app.routes import api
@@ -18,7 +19,7 @@ def create_app():
     # initialize models.db with app
     db.init_app(app)
 
-    # Register Routes API blueprint
+    # Rgister Route API Blueprint
     app.register_blueprint(api)
 
     @app.route("/")

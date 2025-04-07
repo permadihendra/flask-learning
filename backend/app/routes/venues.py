@@ -6,7 +6,7 @@ venues_bp = Blueprint("venues", __name__)
 
 
 # Venues API Endpont -> add new venue
-@venues_bp.route("/api/v1/venues", methods=["POST"])
+@venues_bp.route("/", methods=["POST"])
 def add_venues():
     if request.method == "POST":
         name = request.get_json().get("name")
@@ -21,7 +21,7 @@ def add_venues():
 
 
 # Venues API endpoint -> retrieve all the venues in database
-@venues_bp.route("/api/v1/venues", methods=["GET"])
+@venues_bp.route("/", methods=["GET"])
 def retrieve_venues():
     if request.method == "GET":
         all_venues = Venue.query.all()
@@ -40,7 +40,7 @@ def retrieve_venues():
 
 
 # Venues API Endpoint --> return single venue
-@venues_bp.route("/api/v1/venues/<int:id>", methods=["GET"])
+@venues_bp.route("/<int:id>", methods=["GET"])
 def retrieve_venue(id):
     if request.method == "GET":
         venue = Venue.query.filter(Venue.id == id).first()
@@ -51,7 +51,7 @@ def retrieve_venue(id):
 
 
 # Venues API Endpoint --> update single venue record
-@venues_bp.route("/api/v1/venues/<int:id>", methods=["PUT"])
+@venues_bp.route("/<int:id>", methods=["PUT"])
 def update_venue(id):
     if request.method == "PUT":
         name = request.get_json().get("name")
@@ -65,7 +65,7 @@ def update_venue(id):
 
 
 # Venues API Endpoint --> delete single venue record
-@venues_bp.route("/api/v1/venues/<int:id>", methods=["DELETE"])
+@venues_bp.route("/<int:id>", methods=["DELETE"])
 def remove_venue(id):
     if request.method == "DELETE":
         venue = Venue.query.filter(Venue.id == id).first()

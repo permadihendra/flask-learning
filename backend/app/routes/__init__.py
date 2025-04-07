@@ -5,9 +5,13 @@ from app.routes.speakers import speakers_bp
 from app.routes.venues import venues_bp
 from app.routes.registrations import registrations_bp
 
+# ---------------
+# API ROUTE
+# ---------------
 # Shared blueprint for all route modules
 api = Blueprint("api", __name__)
 
+# Register Route API
 api.register_blueprint(speakers_bp, url_prefix="/api/v1/speakers")
-api.register_blueprint(venues_bp)
-api.register_blueprint(registrations_bp)
+api.register_blueprint(venues_bp, url_prefix="/api/v1/venues")
+api.register_blueprint(registrations_bp, url_prefix="/api/v1/events-registration")

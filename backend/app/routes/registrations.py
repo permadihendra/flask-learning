@@ -6,7 +6,7 @@ from app.models import db
 registrations_bp = Blueprint("registrations", __name__)
 
 
-@registrations_bp.route("/api/v1/events-registration", methods=["POST"])
+@registrations_bp.route("/", methods=["POST"])
 def add_attendees():
     if request.method == "POST":
         data = request.get_json()
@@ -49,7 +49,7 @@ def add_attendees():
 
 
 # Event Registration -> view all registration
-@registrations_bp.route("/api/v1/events-registration", methods=["GET"])
+@registrations_bp.route("/", methods=["GET"])
 def retrieve_attendees():
     if request.method == "GET":
         all_attendees = EventRegistration.query.all()
