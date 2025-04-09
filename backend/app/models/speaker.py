@@ -13,9 +13,9 @@ class Speaker(db.Model):
     position = db.Column(db.String(100), nullable=False)
     bio = db.Column(db.String(100), nullable=False)
     speaker_avatar = db.Column(db.String(100), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.astimezone)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
-        db.DateTime, default=datetime.astimezone, onupdate=datetime.astimezone
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )
 
     def __repr__(self):
