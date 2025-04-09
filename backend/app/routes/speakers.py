@@ -4,6 +4,7 @@ from app.models import db
 import os, re
 from flask_cors import CORS
 from datetime import datetime
+from werkzeug.utils import secure_filename
 
 
 speakers_bp = Blueprint("speakers", __name__)
@@ -11,6 +12,9 @@ CORS(speakers_bp, origins="http://localhost:3000")
 now = datetime.now()
 
 
+# --------------------------------------
+# ROUTE GET SPEAKER DATA
+# --------------------------------------
 @speakers_bp.route("/", methods=["GET"])
 def get_speakers():
     speakers = Speaker.query.all()
@@ -20,6 +24,9 @@ def get_speakers():
         return jsonify([speaker.serialize() for speaker in speakers]), 200
 
 
+# --------------------------------------
+# ROUTE CREATE SPEAKER DATA
+# --------------------------------------
 @speakers_bp.route("/", methods=["POST"])
 def add_speaker():
     name = request.form.get("name")
@@ -45,7 +52,7 @@ def add_speaker():
     else:
         # next check upload avatar
         if avatar and allowed_file(avatar.filename):
-            filename = secure_filename(avatar.filename, email)
+            filename = secure_filename(email + "_" + avatar.filename)
         else:
             filename = "default-avatar.jpg"
 
@@ -82,9 +89,38 @@ def allowed_file(filename):
     )
 
 
-# Function to check secure filename
-def secure_filename(filename, email):
-    new_filename = email + "_" + filename
-    filename = os.path.basename(filename)  # Remove directory path
-    filename = re.sub(r"[^a-zA-Z0-9_.-]", "_", new_filename)  # Replace unsafe chars
-    return filename
+# # Function to check secure filename
+# def secure_filename(filename, email):
+#     new_filename = email + "_" + filename
+#     filename = os.path.basename(filename)  # Remove directory path
+#     filename = re.sub(r"[^a-zA-Z0-9_.-]", "_", new_filename)  # Replace unsafe chars
+#     return filename
+
+
+# --------------------------------------
+# ROUTE UPDATE SPEAKER DATA
+# --------------------------------------
+@speakers_bp.route("/<int:speaker_id>", methods=["PUT"])
+def update_speaker(speaker_id):
+    name = request.form.get("name")
+    email = request.form.get("email")
+    company = request.form.get("company")
+    position = request.form.get("position")
+    bio = request.form.get("bio")
+    avatar = request.files.get("speaker_avatar")
+
+    speaker = Speaker.query.get(speaker_id)
+    if not speaker:
+        return jsonify({"error": "Speaker not found"}), 404
+    elif not all([name, email, company, position, bio]):
+        return jsonify({"error": "All fields are required"})
+    elif email != speaker.email:
+        return jsonify(message="Can not change existing email"), 401
+    else:
+        speaker.name = name
+        speaker.email = email
+        speaker.company = company
+        speaker.position = position
+        speaker.bio = bio
+        db.session.commit()
+        return jsonify({"success": True, "updated speaker": speaker.format()}), 200
