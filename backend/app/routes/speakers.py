@@ -123,4 +123,12 @@ def update_speaker(speaker_id):
         speaker.position = position
         speaker.bio = bio
         db.session.commit()
+
+        # next check upload avatar
+        if avatar and allowed_file(avatar.filename):
+            filename = secure_filename(email + "_" + avatar.filename)
+            # save avatar images
+            avatar.save(os.path.join(current_app.config["UPLOAD_FOLDER"], filename))
+            print(avatar)
+
         return jsonify({"success": True, "updated speaker": speaker.format()}), 200
