@@ -7,7 +7,7 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     speaker_id = db.Column(db.Integer, db.ForeignKey("speakers.id"))
     name = db.Column(db.String(100), nullable=False)
-    date = db.Column(db.DateTime)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow

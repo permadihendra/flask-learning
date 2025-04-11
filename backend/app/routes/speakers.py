@@ -140,7 +140,22 @@ def update_speaker(speaker_id):
 # --------------------------------------
 @speakers_bp.route("/<int:speaker_id>", methods=["DELETE"])
 def delete_speaker(speaker_id):
-    speaker = Speaker.query.get_or_404(speaker_id)
+    speaker = Speaker.query.get(speaker_id)
     # if not current_user.has_permission("delete_speaker"):
     #     abort(http.Forbidden("You do not have permission to delete this speaker"))
     # events = Event
+    if speaker:
+        db.session.delete(speaker)
+        db.session.commit()
+        return (
+            jsonify(
+                {
+                    "success": True,
+                    "message": "You deleted a speaker",
+                    "deleted": speaker.format(),
+                }
+            ),
+            202,
+        )
+    else:
+        return jsonify(message="That speaker does not exist"), 404
