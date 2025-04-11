@@ -5,6 +5,7 @@ import os, re
 from flask_cors import CORS
 from datetime import datetime
 from werkzeug.utils import secure_filename
+from werkzeug.exceptions import InternalServerError
 
 
 speakers_bp = Blueprint("speakers", __name__)
@@ -132,3 +133,14 @@ def update_speaker(speaker_id):
             print(avatar)
 
         return jsonify({"success": True, "updated speaker": speaker.format()}), 200
+
+
+# --------------------------------------
+# DELETE UPDATE SPEAKER DATA
+# --------------------------------------
+@speakers_bp.route("/<int:speaker_id>", methods=["DELETE"])
+def delete_speaker(speaker_id):
+    speaker = Speaker.query.get_or_404(speaker_id)
+    # if not current_user.has_permission("delete_speaker"):
+    #     abort(http.Forbidden("You do not have permission to delete this speaker"))
+    # events = Event

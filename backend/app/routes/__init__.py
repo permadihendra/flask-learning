@@ -4,6 +4,7 @@ from flask import Blueprint
 from app.routes.speakers import speakers_bp
 from app.routes.venues import venues_bp
 from app.routes.registrations import registrations_bp
+from app.routes.users import users_bp
 
 # ---------------
 # API ROUTE
@@ -15,3 +16,4 @@ api = Blueprint("api", __name__)
 api.register_blueprint(speakers_bp, url_prefix="/api/v1/speakers")
 api.register_blueprint(venues_bp, url_prefix="/api/v1/venues")
 api.register_blueprint(registrations_bp, url_prefix="/api/v1/events-registration")
+api.register_blueprint(users_bp, url_prefix="/api/v1/users")
