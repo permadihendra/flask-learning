@@ -1,8 +1,10 @@
 from flask import Blueprint, jsonify, request
 from app.models.venue import Venue
 from app.models import db
+from flask_cors import CORS
 
 venues_bp = Blueprint("venues", __name__)
+CORS(venues_bp, origins="http://localhost:3000")
 
 
 # Venues API Endpont -> add new venue

@@ -1,6 +1,5 @@
 from flask import Flask
 from .config import Config
-from flask_cors import CORS
 from app.models import db
 
 # from app.models.venue import Venue
@@ -14,7 +13,8 @@ def create_app():
     app = Flask(__name__)
 
     # Allow all origins by default
-    # CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
+    # CORS(app, origins="http://localhost:3000")
+    # #
 
     # Load app configuration from the Config class.
     # using class attributes defined in config.py.

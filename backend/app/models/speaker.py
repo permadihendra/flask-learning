@@ -21,7 +21,7 @@ class Speaker(db.Model):
     def __repr__(self):
         return f"<Speaker {self.name}>"
 
-    def serialize(self):
+    def to_dict(self):
         return {
             "id": self.id,
             "name": self.name,
@@ -34,15 +34,15 @@ class Speaker(db.Model):
             "updated_at": self.updated_at.isoformat(),
         }
 
-    def format(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "email": self.email,
-            "company": self.company,
-            "position": self.position,
-            "bio": self.bio,
-            "speaker_avatar": self.speaker_avatar,
-            "created_at": self.created_at.isoformat(),
-            "updated_at": self.updated_at.isoformat(),
-        }
+    # def format(self):
+    #     return {
+    #         "id": self.id,
+    #         "name": self.name,
+    #         "email": self.email,
+    #         "company": self.company,
+    #         "position": self.position,
+    #         "bio": self.bio,
+    #         "speaker_avatar": self.speaker_avatar,
+    #         "created_at": self.created_at.isoformat(),
+    #         "updated_at": self.updated_at.isoformat(),
+    #     }

@@ -1,16 +1,15 @@
 from flask import Blueprint, jsonify, request, current_app
-from app.models.speaker import Speaker
 from app.models import db
+from app.models.speaker import Speaker
 import os, re
-from flask_cors import CORS
 from datetime import datetime
 from werkzeug.utils import secure_filename
-from werkzeug.exceptions import InternalServerError
+from werkzeug.exceptions import NotFound, BadRequest
+from flask_cors import CORS
 
-
-speakers_bp = Blueprint("speakers", __name__)
-CORS(speakers_bp, origins="http://localhost:3000")
 now = datetime.now()
+speakers_bp = Blueprint("speakers", __name__)
+CORS(speakers_bp, origins="http://localhost:3000", supports_credentials=True)
 
 
 # --------------------------------------
@@ -19,10 +18,15 @@ now = datetime.now()
 @speakers_bp.route("/", methods=["GET"])
 def get_speakers():
     speakers = Speaker.query.all()
-    if not speakers:
-        return jsonify({"error": "No speakers data found"})
-    else:
-        return jsonify([speaker.serialize() for speaker in speakers]), 200
+    return jsonify([speaker.to_dict() for speaker in speakers]), 200
+
+
+@speakers_bp.route("/<int:id>", methods=["GET"])
+def get_speaker(id):
+    speaker = Speaker.query.get(id)
+    if not speaker:
+        raise NotFound("User not found")
+    return jsonify(speaker.to_dict()), 200
 
 
 # --------------------------------------
@@ -78,7 +82,7 @@ def add_speaker():
         # print(filename)
         db.session.add(speaker)
         db.session.commit()
-        return jsonify(speaker.serialize()), 201
+        return jsonify(speaker.to_dict()), 201
 
 
 # Function to check if the file extension is allowed
