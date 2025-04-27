@@ -17,9 +17,8 @@ import SignUp from './pages/Auth/SignUp';
 
 // Import AdminPage Component
 import AdminPage from './pages/Admin/AdminPage/AdminPage';
-import Speakers from './pages/Admin/AdminPage/Speakers';
 import Dashboard from './pages/Admin/AdminPage/Dashboard';
-import ViewSpeakers from './pages/Admin/speakers/page';
+import ViewSpeakers from './pages/Admin/speakers';
 
 // Router/Routing
 const router = createBrowserRouter([

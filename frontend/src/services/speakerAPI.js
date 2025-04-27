@@ -17,20 +17,31 @@ const handleErrors = (error) => {
   throw error;
 };
 
-// Function to set headers with Content-type: application/json
-const setHeaders = () => {
-  axios.defaults.headers.common['Content-Type'] = 'application/json';
-};
+// Helper
+const addHeaders = () => ({
+  'Content-Type': 'application/json',
+});
 
 // Function to get speakers
 const getSpeakers = async () => {
   try {
-    setHeaders();
-    const response = await axios.get(`${API_URL}/speakers`);
+    const response = await axios.get(`${API_URL}/speakers/`, {
+      headers: addHeaders(),
+    });
     return response.data;
   } catch (error) {
-    handleErrors();
+    console.error('Error fetching speakers:', error.response?.data || error.message);
+    handleErrors(error); // ✅ pass error into handleErrors
   }
 };
 
-export default getSpeakers;
+// Add Speaker function
+const addSpeaker = async (speakerData) => {
+  const url = `${API_URL}/speakers`;
+  return axios
+    .post(url, speakerData, { headers: addHeaders() })
+    .then((response) => response.data)
+    .catch(handleErrors);
+};
+
+export default { getSpeakers, addSpeaker };

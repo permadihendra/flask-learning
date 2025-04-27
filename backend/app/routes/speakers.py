@@ -15,7 +15,9 @@ CORS(speakers_bp, origins="http://localhost:3000", supports_credentials=True)
 # --------------------------------------
 # ROUTE GET SPEAKER DATA
 # --------------------------------------
-@speakers_bp.route("/", methods=["GET"])
+@speakers_bp.route(
+    "/", methods=["GET"]
+)  # dont forget Add trailing slash 'speakers/' at the end of fetch url
 def get_speakers():
     speakers = Speaker.query.all()
     return jsonify([speaker.to_dict() for speaker in speakers]), 200
