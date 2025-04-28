@@ -19,6 +19,7 @@ import SignUp from './pages/Auth/SignUp';
 import AdminPage from './pages/Admin/AdminPage/AdminPage';
 import Dashboard from './pages/Admin/AdminPage/Dashboard';
 import ViewSpeakers from './pages/Admin/speakers';
+import CreateSpeaker from './pages/Admin/speakers/create';
 
 // Router/Routing
 const router = createBrowserRouter([
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: '/admin/speakers',
         element: <ViewSpeakers />,
+      },
+      {
+        path: '/admin/speakers/create',
+        element: <CreateSpeaker />,
       },
       //   {
       //     path: "/admin/venues",

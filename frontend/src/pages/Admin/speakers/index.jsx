@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import speakerAPI from '../../../services/speakerAPI';
+import NavigateButton from '../../../components/Common/navigateButton';
 
 const ViewSpeakers = () => {
   const [speakers, setSpeakers] = useState([]);
@@ -31,6 +32,7 @@ const ViewSpeakers = () => {
   return (
     <div>
       <h1>This is Speakers pages</h1>
+      <NavigateButton name="Add Speaker" url="/admin/speakers/create" />
       {console.log(speakers)}
       {speakers.length === 0 ? (
         <p>No speakers found.</p>

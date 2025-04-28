@@ -19,7 +19,7 @@ const handleErrors = (error) => {
 
 // Helper
 const addHeaders = () => ({
-  'Content-Type': 'application/json',
+  'Content-Type': 'multipart/form-data',
 });
 
 // Function to get speakers
@@ -37,7 +37,7 @@ const getSpeakers = async () => {
 
 // Add Speaker function
 const addSpeaker = async (speakerData) => {
-  const url = `${API_URL}/speakers`;
+  const url = `${API_URL}/speakers/`;
   return axios
     .post(url, speakerData, { headers: addHeaders() })
     .then((response) => response.data)
